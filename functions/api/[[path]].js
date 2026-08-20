@@ -1659,34 +1659,55 @@ export async function onRequest(context) {
     );
   }
 
-  if (!context.env.SESSION_SECRET || String(context.env.SESSION_SECRET).length < 32) {
-    return Response.json(
-      { error: "SESSION_SECRET is missing or too short." },
-      { status: 503 }
-    );
-  }
+if (!context.env.SESSION_SECRET || String(context.env.SESSION_SECRET).length < 32) {
+  return Response.json(
+    { error: "SESSION_SECRET is missing or too short." },
+    { status: 503 }
+  );
+}
 
-  const client = new Client({ connectionString: context.env.HYPERDRIVE.connectionString });
-  await client.connect();
+const client = new Client({
+  connectionString: context.env.HYPERDRIVE.connectionString
+});
 
-  try {
-    return await requestContext.run({ client, env: context.env }, async () => {
+await client.connect();
+
+try {
+  return await requestContext.run(
+    { client, env: context.env },
+    async () => {
       const req = makeNodeLikeRequest(context.request);
       const res = new PagesResponse();
+
       const url = new URL(context.request.url);
+
+      let path = url.pathname;
+
+      if (path.length > 1 && path.endsWith("/")) {
+        path = path.slice(0, -1);
+      }
+
+      if (!path.startsWith("/api")) {
+        path = `/api${path}`;
+      }
+
+      url.pathname = path;
 
       try {
         await handleApi(req, res, url);
       } catch (error) {
         console.error("[API] Unhandled request error:", error);
+
         if (!res.headersSent) {
-          sendJson(res, 500, { error: "Internal server error." });
+          sendJson(res, 500, {
+            error: "Internal server error."
+          });
         }
       }
 
       return res.toResponse();
-    });
-  } finally {
-    await client.end().catch(() => {});
-  }
+    }
+  );
+} finally {
+  await client.end().catch(() => {});
 }
