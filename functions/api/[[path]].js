@@ -1689,18 +1689,54 @@ export async function onRequest(context) {
       async () => {
         const req = makeNodeLikeRequest(context.request);
         const res = new PagesResponse();
-
-        // Use the REAL request URL.
-        // /api/health stays /api/health.
         const url = new URL(context.request.url);
 
-        // Only remove a trailing slash.
-        if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
+        /*
+         * This file lives at functions/api/[[path]].js.
+         *
+         * Cloudflare exposes the part matched by [[path]] through
+         * context.params.path. For example:
+         *
+         *   /api/health      -> ["health"]
+         *   /api/auth/me     -> ["auth", "me"]
+         *   /api/wiki/editor -> ["wiki", "editor"]
+         *
+         * Build the internal API pathname from that instead of relying on
+         * request.url pathname/rewrite behavior.
+         */
+        const rawPath = context.params?.path;
+
+        let parts = [];
+
+        if (Array.isArray(rawPath)) {
+          parts = rawPath;
+        } else if (typeof rawPath === "string" && rawPath) {
+          parts = rawPath.split("/");
+        }
+
+        parts = parts
+          .map(part => String(part || "").trim())
+          .filter(Boolean);
+
+        url.pathname =
+          parts.length > 0
+            ? `/api/${parts.join("/")}`
+            : "/api";
+
+        // Normalize an accidental trailing slash.
+        if (
+          url.pathname.length > 1 &&
+          url.pathname.endsWith("/")
+        ) {
           url.pathname = url.pathname.slice(0, -1);
         }
 
         console.log(
-          `[API] ${context.request.method} ${url.pathname}`
+          `[API] method=${context.request.method} ` +
+          `request=${new URL(context.request.url).pathname} ` +
+          `functionPath=${context.functionPath || ""} ` +
+          `params=${JSON.stringify(context.params || {})} ` +
+          `resolved=${url.pathname}`
         );
 
         try {
