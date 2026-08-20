@@ -1654,61 +1654,80 @@ function makeNodeLikeRequest(request) {
 export async function onRequest(context) {
   if (!context.env.HYPERDRIVE?.connectionString) {
     return Response.json(
-      { error: "Database binding missing. Add a Hyperdrive binding named HYPERDRIVE." },
+      {
+        error:
+          "Database binding missing. Add a Hyperdrive binding named HYPERDRIVE."
+      },
       { status: 503 }
     );
   }
 
-if (!context.env.SESSION_SECRET || String(context.env.SESSION_SECRET).length < 32) {
-  return Response.json(
-    { error: "SESSION_SECRET is missing or too short." },
-    { status: 503 }
-  );
-}
+  if (
+    !context.env.SESSION_SECRET ||
+    String(context.env.SESSION_SECRET).length < 32
+  ) {
+    return Response.json(
+      {
+        error: "SESSION_SECRET is missing or too short."
+      },
+      { status: 503 }
+    );
+  }
 
-const client = new Client({
-  connectionString: context.env.HYPERDRIVE.connectionString
-});
+  const client = new Client({
+    connectionString: context.env.HYPERDRIVE.connectionString
+  });
 
-await client.connect();
+  try {
+    await client.connect();
 
-try {
-  return await requestContext.run(
-    { client, env: context.env },
-    async () => {
-      const req = makeNodeLikeRequest(context.request);
-      const res = new PagesResponse();
+    return await requestContext.run(
+      {
+        client,
+        env: context.env
+      },
+      async () => {
+        const req = makeNodeLikeRequest(context.request);
+        const res = new PagesResponse();
 
-      const url = new URL(context.request.url);
+        // Use the REAL request URL.
+        // /api/health stays /api/health.
+        const url = new URL(context.request.url);
 
-      let path = url.pathname;
-
-      if (path.length > 1 && path.endsWith("/")) {
-        path = path.slice(0, -1);
-      }
-
-      if (!path.startsWith("/api")) {
-        path = `/api${path}`;
-      }
-
-      url.pathname = path;
-
-      try {
-        await handleApi(req, res, url);
-      } catch (error) {
-        console.error("[API] Unhandled request error:", error);
-
-        if (!res.headersSent) {
-          sendJson(res, 500, {
-            error: "Internal server error."
-          });
+        // Only remove a trailing slash.
+        if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
+          url.pathname = url.pathname.slice(0, -1);
         }
-      }
 
-      return res.toResponse();
-    }
-  );
-} finally {
+        console.log(
+          `[API] ${context.request.method} ${url.pathname}`
+        );
+
+        try {
+          await handleApi(req, res, url);
+        } catch (error) {
+          console.error("[API] Unhandled request error:", error);
+
+          if (!res.headersSent) {
+            sendJson(res, 500, {
+              error: "Internal server error."
+            });
+          }
+        }
+
+        return res.toResponse();
+      }
+    );
+  } catch (error) {
+    console.error("[API] Database connection failed:", error);
+
+    return Response.json(
+      {
+        error: "Database connection failed."
+      },
+      { status: 503 }
+    );
+  } finally {
     await client.end().catch(() => {});
   }
 }
