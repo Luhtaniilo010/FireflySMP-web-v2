@@ -7,3 +7,4 @@ Cloudflare Pages-ready website.
 - Database: existing PostgreSQL via Cloudflare Hyperdrive
 - Setup: `CLOUDFLARE-SETUP.md`
 - Public logo URL after deployment: `/assets/logo.png`
+x
