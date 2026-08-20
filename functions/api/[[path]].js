@@ -3,6 +3,7 @@ import { AsyncLocalStorage } from "node:async_hooks";
 import { Client } from "pg";
 
 const requestContext = new AsyncLocalStorage();
+const loginAttempts = new Map();
 
 function contextStore() {
   const store = requestContext.getStore();
