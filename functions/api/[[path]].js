@@ -1708,7 +1708,7 @@ try {
       return res.toResponse();
     }
   );
-} } finally {
+} finally {
     await client.end().catch(() => {});
   }
 }
