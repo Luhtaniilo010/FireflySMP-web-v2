@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki | FireflySMP</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=14">
+  <link rel="stylesheet" href="css/wiki.css">
+</head>
+
+<body class="protect-source wiki-page-body">
+
+<header class="topbar wiki-topbar">
+  <div class="topbar-inner">
+
+    <a class="mini-brand" href="index.html">
+      <img class="mini-logo-image" src="assets/firefly-icon.png" alt="FireflySMP">
+      <span class="mini-brand-text">FIREFLY</span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html">HOME</a>
+      <a href="play.html">PLAY</a>
+      <a href="vote.html">VOTE</a>
+      <a href="staff.html">STAFF</a>
+      <a class="active" href="wiki.html">WIKI</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="square-action discord-action" href="#" aria-label="Discord">
+        <svg class="discord-clean-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19.5 6.3A16 16 0 0 0 15.4 5l-.5 1a14 14 0 0 0-5.8 0l-.5-1a16 16 0 0 0-4.1 1.3C2 10 1.3 13.7 1.6 17.3A16.7 16.7 0 0 0 6.5 20l1.2-1.6c-.7-.3-1.4-.7-2-1.1l.5.3c3.7 1.7 7.9 1.7 11.6 0l.5-.3c-.6.4-1.3.8-2 1.1l1.2 1.6a16.7 16.7 0 0 0 4.9-2.7C22.7 13.7 22 10 19.5 6.3ZM8.5 15.1c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm7 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/>
+        </svg>
+      </a>
+
+      <a class="header-button store-button" href="#">
+        <svg class="icon cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 4h2l2.2 9.2a2 2 0 0 0 1.9 1.5h7.7a2 2 0 0 0 1.9-1.4L20 8H7"/>
+          <circle cx="10" cy="19" r="1.5"/>
+          <circle cx="17" cy="19" r="1.5"/>
+        </svg>
+        STORE
+      </a>
+
+      <button class="header-button sign-button" id="signInButton" type="button">
+        <span class="minecraft-head" id="signInHead" aria-hidden="true">
+          <span class="mc-hair"></span>
+          <span class="mc-eye mc-eye-left"></span>
+          <span class="mc-eye mc-eye-right"></span>
+          <span class="mc-mouth"></span>
+        </span>
+        <span class="sign-in-text" id="signInText">SIGN IN</span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<div class="wiki-layout">
+
+  <aside class="wiki-sidebar" id="wikiSidebar">
+    <div class="wiki-sidebar-header">
+      <div>
+        <span>FIREFLYSMP</span>
+        <strong>Wiki</strong>
+      </div>
+
+      <button class="wiki-mobile-close" id="wikiMobileClose" type="button">×</button>
+    </div>
+
+    <label class="wiki-search">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m16 16 4 4"></path>
+      </svg>
+
+      <input id="wikiSearch" type="search" placeholder="Search documentation...">
+      <kbd>/</kbd>
+    </label>
+
+    <div class="wiki-search-results" id="wikiSearchResults"></div>
+
+    <nav class="wiki-nav" id="wikiNav"></nav>
+
+    <div class="wiki-sidebar-bottom">
+      <span class="wiki-status-dot"></span>
+      <div>
+        <strong>FireflySMP Wiki</strong>
+        <span>Player documentation</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="wiki-sidebar-overlay" id="wikiSidebarOverlay"></div>
+
+  <main class="wiki-main">
+    <div class="wiki-mobile-toolbar">
+      <button id="wikiMobileMenu" type="button">
+        <span>☰</span>
+        MENU
+      </button>
+      <strong id="wikiMobilePageTitle">Welcome</strong>
+    </div>
+
+    <div class="wiki-content-shell">
+      <article class="wiki-article">
+        <div class="wiki-breadcrumb" id="wikiBreadcrumb"></div>
+
+        <div id="wikiPageContent"></div>
+
+        <div class="wiki-bottom-nav">
+          <button id="wikiPrevButton" class="wiki-bottom-card wiki-prev-card" type="button">
+            <span>PREVIOUS</span>
+            <strong id="wikiPrevTitle">—</strong>
+          </button>
+
+          <button id="wikiNextButton" class="wiki-bottom-card wiki-next-card" type="button">
+            <span>NEXT</span>
+            <strong id="wikiNextTitle">—</strong>
+          </button>
+        </div>
+      </article>
+
+      <aside class="wiki-toc">
+        <div class="wiki-toc-inner">
+          <span class="wiki-toc-heading">ON THIS PAGE</span>
+          <div id="wikiToc"></div>
+
+          <div class="wiki-help">
+            <span class="wiki-help-icon">?</span>
+            <strong>Need help?</strong>
+            <p>Ask staff or the community if the wiki doesn't answer your question.</p>
+            <a href="#">OPEN DISCORD ↗</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+</div>
+
+<!-- PAGE EDITOR -->
+<div class="wiki-modal-overlay" id="wikiEditorOverlay" aria-hidden="true">
+  <div class="wiki-modal wiki-editor-modal">
+    <div class="wiki-editor-header">
+      <div>
+        <span class="wiki-modal-kicker">WIKI EDITOR</span>
+        <h2 id="wikiEditorTitle">Edit page</h2>
+      </div>
+      <button class="wiki-modal-close" data-close-modal="editor" type="button">×</button>
+    </div>
+
+    <div class="wiki-editor-grid">
+      <label>
+        PAGE ID
+        <input id="wikiEditId" type="text" placeholder="example-page">
+      </label>
+
+      <label>
+        CATEGORY
+        <select id="wikiEditCategory"></select>
+      </label>
+
+      <label>
+        PAGE TITLE
+        <input id="wikiEditTitle" type="text">
+      </label>
+
+      <label>
+        DESCRIPTION
+        <textarea id="wikiEditDescription" rows="3"></textarea>
+      </label>
+
+      <label>
+        ARTICLE CONTENT
+        <textarea id="wikiEditContent" rows="18"></textarea>
+      </label>
+    </div>
+
+    <div class="wiki-editor-help">
+      <strong>Formatting:</strong>
+      <span><code>## Heading</code></span>
+      <span><code>### Smaller heading</code></span>
+      <span><code>- List item</code></span>
+      <span><code>**bold**</code></span>
+      <span><code>`command`</code></span>
+    </div>
+
+    <div class="wiki-editor-actions">
+      <button class="wiki-delete-button" id="wikiDeletePage" type="button">DELETE</button>
+      <button class="wiki-draft-button" id="wikiSaveDraft" type="button">SAVE DRAFT</button>
+      <button class="wiki-publish-button" id="wikiPublishPage" type="button">PUBLISH</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY MANAGER -->
+<div class="wiki-modal-overlay" id="wikiCategoryOverlay" aria-hidden="true">
+  <div class="wiki-modal wiki-category-modal">
+    <button class="wiki-modal-close" data-close-modal="categories" type="button">×</button>
+
+    <span class="wiki-modal-kicker">WIKI STRUCTURE</span>
+    <h2>Categories</h2>
+    <p>Add, rename or remove categories. Published pages update for everyone.</p>
+
+    <div id="wikiCategoryList" class="wiki-category-list"></div>
+
+    <div class="wiki-category-add">
+      <input id="wikiNewCategory" type="text" placeholder="New category">
+      <button id="wikiAddCategory" type="button">ADD</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js?v=11"></script>
+<script src="js/wiki.js"></script>
+
+
+
+
+<footer class="firefly-footer-v9">
+  <div class="footer-v9-inner">
+
+    <section class="footer-v9-about">
+      <div class="footer-v9-brand">
+        <img src="assets/firefly-icon.png" alt="">
+        <div>
+          <strong>FIREFLYSMP</strong>
+          <span>COMMUNITY SURVIVAL</span>
+        </div>
+      </div>
+
+      <h3>About FireflySMP</h3>
+      <p>
+        A community-focused Minecraft survival server for Java and Bedrock.
+        Build, trade, explore and progress without losing the feeling of survival.
+      </p>
+
+      <strong class="footer-v9-copy">© 2026 FIREFLYSMP</strong>
+      <small>We are not affiliated with or endorsed by Mojang Studios.</small>
+    </section>
+
+    <section class="footer-v9-links">
+      <h3>Useful Links</h3>
+
+      <nav>
+        <a href="index.html"><span>Home</span><b>→</b></a>
+        <a href="play.html"><span>Play</span><b>→</b></a>
+        <a href="vote.html"><span>Vote</span><b>→</b></a>
+        <a href="staff.html"><span>Staff</span><b>→</b></a>
+        <a href="wiki.html"><span>Wiki</span><b>→</b></a>
+      </nav>
+
+      <div class="footer-v9-socials">
+        <a href="#" class="instagram" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 2A3.2 3.2 0 0 0 4 7.2v9.6A3.2 3.2 0 0 0 7.2 20h9.6a3.2 3.2 0 0 0 3.2-3.2V7.2A3.2 3.2 0 0 0 16.8 4H7.2Zm10.2 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+        </a>
+
+        <a href="#" class="youtube" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.2a3.1 3.1 0 0 0-2.18-2.2C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.32.5A3.1 3.1 0 0 0 .5 6.2 32.3 32.3 0 0 0 0 12a32.3 32.3 0 0 0 .5 5.8A3.1 3.1 0 0 0 2.68 20c1.92.5 9.32.5 9.32.5s7.4 0 9.32-.5a3.1 3.1 0 0 0 2.18-2.2A32.3 32.3 0 0 0 24 12a32.3 32.3 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12 9.6 15.6Z"/></svg>
+        </a>
+
+        <a href="#" class="tiktok" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 5.82a5.95 5.95 0 0 0 3.48 1.11v3.1a9.06 9.06 0 0 1-3.48-.7v6.3a6.14 6.14 0 1 1-5.3-6.08v3.12a3.05 3.05 0 1 0 2.2 2.93V2h3.1v3.82Z"/></svg>
+        </a>
+
+        <a href="#" class="discord" aria-label="Discord">
+          <svg viewBox="0 0 127.14 96.36"><path fill="currentColor" d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0 105.89 105.89 0 0 0 19.39 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.17-16.14c2.64-27.38-4.51-51.11-18.88-72.15ZM42.45 65.69C36.18 65.69 31 59.93 31 52.86S36.08 40 42.45 40s11.54 5.82 11.43 12.86c0 7.07-5.06 12.83-11.43 12.83Zm42.24 0c-6.27 0-11.43-5.76-11.43-12.83S78.33 40 84.69 40s11.54 5.82 11.43 12.86c0 7.07-5.06 12.83-11.43 12.83Z"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="footer-v9-support">
+      <h3>Support</h3>
+
+      <p>
+        Need help before joining? Ask the community or staff on Discord.
+      </p>
+
+      
+
+      
+      <a href="#" class="footer-v9-video-card" target="_blank" rel="noopener">
+        <div class="footer-v9-video-thumb">
+          <img src="assets/vote-banner-2.png" alt="FireflySMP video preview">
+          <span class="footer-v9-play-icon">▶</span>
+        </div>
+
+        <div class="footer-v9-video-copy">
+          <span class="footer-v9-video-kicker">WATCH ON YOUTUBE</span>
+          <strong>FIREFLYSMP SHOWCASE</strong>
+          <small>See the server, builds and atmosphere in action.</small>
+        </div>
+      </a>
+    
+    </section>
+
+  </div>
+</footer>
+
+
+
+</body>
+</html>
