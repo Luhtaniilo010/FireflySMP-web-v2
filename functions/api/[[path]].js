@@ -1708,6 +1708,7 @@ try {
       return res.toResponse();
     }
   );
-} finally {
-  await client.end().catch(() => {});
+} } finally {
+    await client.end().catch(() => {});
+  }
 }
