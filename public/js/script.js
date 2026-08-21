@@ -421,7 +421,6 @@ document.getElementById("footerCopyIpV3")?.addEventListener("click", async (even
 });
 
 
-// V7 sticky header state
 (() => {
   const topbar = document.querySelector(".topbar");
   if (!topbar) return;
@@ -431,7 +430,6 @@ document.getElementById("footerCopyIpV3")?.addEventListener("click", async (even
   window.addEventListener("scroll", update, { passive: true });
 })();
 
-// V7 global footer IP copy
 document.querySelectorAll(".global-footer-ip").forEach(button => {
   button.addEventListener("click", async () => {
     const original = button.textContent;
@@ -478,3 +476,40 @@ document.querySelectorAll(".footer-v9-copyip").forEach(button => {
     setTimeout(() => button.textContent = old, 1100);
   });
 });
+
+const languageButton = document.querySelector(".language-button");
+
+if (languageButton) {
+  const languageMenu = document.createElement("div");
+  languageMenu.className = "language-menu";
+  languageMenu.innerHTML = `
+    <div class="language-menu-current">
+      <strong>English</strong>
+      <span>Current language</span>
+    </div>
+
+    <div class="language-menu-divider"></div>
+
+    <div class="language-menu-soon">
+      MORE LANGUAGES SOON
+    </div>
+  `;
+
+  languageButton.parentElement.appendChild(languageMenu);
+
+  languageButton.addEventListener("click", event => {
+    event.stopPropagation();
+    languageMenu.classList.toggle("open");
+    languageButton.classList.toggle("open");
+  });
+
+  document.addEventListener("click", event => {
+    if (
+      !languageMenu.contains(event.target) &&
+      !languageButton.contains(event.target)
+    ) {
+      languageMenu.classList.remove("open");
+      languageButton.classList.remove("open");
+    }
+  });
+}
