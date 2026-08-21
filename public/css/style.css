@@ -1646,7 +1646,6 @@ button {
   transform: translateX(4px);
 }
 
-/* SECTION HEADERS */
 
 .section-topline {
   display: flex;
@@ -1723,7 +1722,6 @@ button {
     linear-gradient(145deg, #f7fbfd, #d8ecf7);
 }
 
-/* pseudo pixel scenery */
 .pixel-hill {
   position: absolute;
   bottom: 0;
@@ -2058,9 +2056,6 @@ button {
 }
 
 
-/* =========================================================
-   V14 SIMPLIFIED RELEASE SECTION + MORE SPACE
-========================================================= */
 
 .intro-section {
   padding-top: 145px;
@@ -2436,10 +2431,6 @@ button {
 }
 
 
-/* =========================================================
-   V15 CASUAL COPY / SOURCE DETERRENTS
-   NOTE: client-side source can never be truly hidden.
-========================================================= */
 
 .protect-source {
   -webkit-user-select: none;
@@ -2452,7 +2443,6 @@ button {
   user-drag: none;
 }
 
-/* Keep forms usable */
 .protect-source input,
 .protect-source textarea,
 .protect-source [contenteditable="true"] {
@@ -2460,7 +2450,7 @@ button {
   user-select: text;
 }
 
-/* Staff authentication */
+
 .staff-pin-wrap{display:none!important;margin-top:7px}
 .staff-pin-wrap.visible{display:flex!important}
 .staff-pin-wrap span{font-size:7px;font-weight:800;letter-spacing:.1em;color:#78837d}
@@ -2469,10 +2459,6 @@ button {
 .staff-pin-wrap small{font-size:7px;color:#8d9892}
 .staff-control-button{min-width:82px;color:#fff;background:#0a7897;box-shadow:0 4px 0 #075b72}
 
-
-/* =========================
-   Home Lower Section V2
-   ========================= */
 
 .home-lower{
   position:relative;
@@ -2657,9 +2643,6 @@ button {
   text-decoration:none;
 }
 
-/* =========================
-   Firefly Footer V2
-   ========================= */
 
 .site-footer{
   position:relative;
@@ -2854,7 +2837,6 @@ button {
 @media(max-width:520px){.chunky-button{grid-template-columns:42px 1fr auto;padding:12px}.chunky-icon{width:40px;height:40px}.footer-v3-nav{gap:14px}.footer-v3-socials{gap:10px}}
 
 
-/* V4 spacing correction */
 .simple-home-lower{
   padding:62px 22px 58px !important;
 }
@@ -2902,7 +2884,6 @@ button {
 }
 
 
-/* V5 — remove remaining Home whitespace */
 html,body{
   margin:0;
   padding:0;
@@ -2955,7 +2936,6 @@ html,body{
   min-height:42px !important;
 }
 
-/* Prevent generic section rules from creating huge vertical gaps */
 body.home-page main,
 body.home-page section{
   margin-bottom:0;
@@ -2968,9 +2948,6 @@ body.home-page section{
 }
 
 
-/* =========================================================
-   V6 HOME STRUCTURE FIX
-   ========================================================= */
 
 .hero{
   margin-bottom:0 !important;
@@ -3007,9 +2984,6 @@ body.home-page section{
 }
 
 
-/* =========================================================
-   V7 GLOBAL STICKY HEADER
-   ========================================================= */
 .topbar{
   position:sticky !important;
   top:0 !important;
@@ -3221,9 +3195,6 @@ body.home-page section{
 
 
 
-/* =========================================================
-   V8 WAVE TRANSITION — keep curve, no white strip
-   ========================================================= */
 .firefly-transition-wave{
   position:relative;
   height:76px;
@@ -3251,9 +3222,6 @@ body.home-page section{
   padding-top:40px !important;
 }
 
-/* =========================================================
-   V8 FOOTER — new design from scratch
-   ========================================================= */
 .firefly-footer-v8{
   position:relative;
   margin:0;
@@ -3483,9 +3451,6 @@ body.home-page section{
   background:#526755;
 }
 
-/* =========================================================
-   V8 STAFF PIN — separate secure verification card
-   ========================================================= */
 .staff-pin-wrap{
   display:none !important;
   margin-top:12px;
@@ -3663,10 +3628,6 @@ body.home-page section{
   }
 }
 
-
-/* =========================================================
-   V9 FOOTER — Fresh-style idea, Firefly colors
-   ========================================================= */
 
 .firefly-footer-v9{
   margin:0;
@@ -3935,9 +3896,6 @@ body.home-page section{
 }
 
 
-/* =========================================================
-   V13 Footer video card
-   ========================================================= */
 
 .footer-v9-support-buttons{
   display:none !important;
@@ -4040,11 +3998,6 @@ body.home-page section{
 }
 
 
-/* =========================================================
-   V14 cleanup
-   ========================================================= */
-
-/* HOME: real wave between hero image and lower content */
 .home-hero-wave{
   position:relative;
   z-index:8;
@@ -4066,12 +4019,10 @@ body.home-page section{
   border-top:0 !important;
 }
 
-/* STAFF: no large intro banner */
 .staff-simple-section{
   padding-top:48px !important;
 }
 
-/* Moderator + Helper are intentionally simple: head + name only */
 .staff-compact-row{
   display:flex;
   justify-content:center;
@@ -4100,7 +4051,6 @@ body.home-page section{
   line-height:1.15;
 }
 
-/* PLAY: remove the dark-green dead strip below the hero */
 body:has(.join-page) .join-page,
 body:has(.join-page) .join-hero{
   margin-bottom:0 !important;
@@ -4110,4 +4060,80 @@ body:has(.join-page) .join-hero::after,
 body:has(.join-page) .join-page::after{
   display:none !important;
   content:none !important;
+}
+
+.header-actions {
+  position: relative;
+}
+
+.language-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 128px;
+  width: 205px;
+  padding: 9px;
+  border: 1px solid rgba(32, 45, 35, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 16px 45px rgba(20, 35, 24, 0.16),
+    0 3px 0 rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px) scale(0.98);
+  transform-origin: top right;
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease,
+    visibility 0.16s;
+  z-index: 1000;
+}
+
+.language-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.language-menu-current {
+  padding: 11px 12px;
+  border-radius: 7px;
+  background: #f5f7f4;
+}
+
+.language-menu-current strong {
+  display: block;
+  color: #27332b;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.language-menu-current span {
+  display: block;
+  margin-top: 3px;
+  color: #929b94;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.language-menu-divider {
+  height: 1px;
+  margin: 8px 3px;
+  background: #edf0ec;
+}
+
+.language-menu-soon {
+  padding: 8px 10px;
+  color: #a3aaa5;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+}
+
+.language-button.open .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.language-button .chevron-icon {
+  transition: transform 0.16s ease;
 }
